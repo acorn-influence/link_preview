@@ -84,7 +84,7 @@ module LinkPreview
         builder.options[:open_timeout] = @config.open_timeout
 
         builder.use ExtraEnv
-        builder.use Faraday::FollowRedirects, limit: @config.max_redirects if @config.follow_redirects
+        builder.use Faraday::FollowRedirects::Middleware, limit: @config.max_redirects if @config.follow_redirects
         builder.use NormalizeURI
         builder.use ForceUTF8Body
         @config.middleware.each { |middleware| builder.use middleware }
